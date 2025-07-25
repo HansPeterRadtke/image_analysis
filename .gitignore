@@ -1,0 +1,18 @@
+# Ignore build artifacts and temporary files
+build/
+*.log
+*.tmp
+.idea/
+*.iml
+.gradle/
+local.properties
+__pycache__/
+*.pyc
+
+# Ignore generated and temp files
+result_*.jpg
+result_*.png
+temp_*.jpg
+temp_*.png
+test_*.jpg
+test_*.png
