@@ -1,1 +1,1 @@
-from .core import image_analyzer
+from .core import load_model, classify_image, classify_folder
