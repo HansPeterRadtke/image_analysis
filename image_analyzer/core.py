@@ -17,7 +17,8 @@ TEXT_CATEGORIES = [
   "movie still", "social media post", "advertisement",
   "a cat", "a dog", "a person", "a group of people",
   "a vehicle", "a landscape", "a building", "3D render",
-  "emoji", "icon", "furniture", "food", "animal"
+  "emoji", "icon", "furniture", "food", "animal",
+  "logo",
 ]
 
 def load_model():
@@ -25,8 +26,8 @@ def load_model():
   print("[DEBUG] load_model called")
   try:
     start_time = time.time()
-    processor = CLIPProcessor.from_pretrained("openai/clip-vit-base-patch32")
-    model = CLIPModel.from_pretrained("openai/clip-vit-base-patch32")
+    processor  = CLIPProcessor.from_pretrained("openai/clip-vit-base-patch32")
+    model      = CLIPModel.from_pretrained("openai/clip-vit-base-patch32")
     print(f"[DEBUG] model and processor loaded in {time.time() - start_time:.2f} seconds")
   except Exception as e:
     print("[ERROR] loading model or processor:", str(e))
@@ -52,7 +53,7 @@ def classify_image(image_path):
     matches = [(TEXT_CATEGORIES[i], probs[i].item()) for i in top_indices]
 
     for label, score in matches:
-      print(f"[DEBUG] top match: {label} ({score:.4f})")
+      print(f"[DEBUG] '%30s': %6.4f; " % (label, score))
     print(f"[DEBUG] classification time: {time.time() - start_time:.2f} seconds")
     return matches
   except Exception as e:
@@ -73,5 +74,8 @@ def classify_folder(folder_path):
     print("[ERROR] folder classification failed:", str(e))
   print("\n[DEBUG] FINAL SUMMARY:")
   for fname, matches in summary:
-    match_str = ", ".join([f"{label} ({score:.2f})" for label, score in matches])
-    print(f"{fname}: {match_str}")
+    print("'%30s'" % (fname))
+    for label, score in matches:
+      print("  '%30s': %6.4f; " % (label, score))
+
+
