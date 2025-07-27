@@ -14,3 +14,4 @@ image_analyzer.classify_folder(folder_path)
 print(f"[DEBUG] folder classified in {time.time() - start_time:.2f} seconds", flush=True)
 
 print("[DEBUG] test script finished"                     , flush=True)
+
