@@ -1,16 +1,26 @@
 import os
-import clip
-import torch
+from huggingface_hub import snapshot_download
 
-print("[DEBUG] starting CLIP model download")
+MODELS = [
+  ("openai/clip-vit-base-patch32", "clip-vit-base-patch32"),
+  ("google/siglip-base-patch16-224", "siglip-base-patch16-224"),
+  ("laion/CLIP-ViT-B-32-laion2B-s34B-b79K", "laion-clip-vit-b-32-laion2B"),
+  ("laion/CLIP-ViT-H-14-laion2B-s32B-b79K", "laion-clip-vit-h-14-laion2B"),
+  ("ybelkada/clip-rsicd-vit-b16", "clip-rsicd-vit-b16")
+]
 
-try:
-  model_name = "ViT-B/32"
-  model_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../models"))
-
-  model, preprocess = clip.load(model_name, device="cpu", download_root=model_path)
-
-  print("[DEBUG] CLIP model downloaded successfully")
-  print(f"[DEBUG] saved to: {model_path}")
-except Exception as e:
-  print(f"[ERROR] {str(e)}")
+if __name__ == '__main__':
+  for model_id, folder_name in MODELS:
+    try:
+      target_dir = f"/home/hans/dev/GPT/models/{folder_name}"
+      print(f"\n[DEBUG] Starting download of {model_id} to {target_dir}", flush=True)
+      os.makedirs(target_dir, exist_ok=True)
+      snapshot_download(
+        repo_id=model_id,
+        local_dir=target_dir,
+        local_dir_use_symlinks=False,
+        resume_download=True
+      )
+      print(f"[DEBUG] Download complete for {model_id}\n", flush=True)
+    except Exception as e:
+      print(f"[ERROR] Failed to download {model_id}: {e}\n", flush=True)

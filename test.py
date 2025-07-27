@@ -1,7 +1,13 @@
-from image_analyzer import core as image_analyzer
-import time
+print("[DEBUG] test script started", flush=True)
 
-print("[DEBUG] test script starting"                     , flush=True)
+import time
+t1 = time.time()
+
+import image_analyzer
+
+t2 = time.time()
+td = (t2 - t1)
+print("[DEBUG] importing took %6.2f sec" % (td), flush=True)
 
 start_time = time.time()
 image_analyzer.load_model()
@@ -13,5 +19,5 @@ folder_path = "/var/www/html/images"
 image_analyzer.classify_folder(folder_path)
 print(f"[DEBUG] folder classified in {time.time() - start_time:.2f} seconds", flush=True)
 
-print("[DEBUG] test script finished"                     , flush=True)
+print("[DEBUG] test script finished", flush=True)
 

@@ -1,0 +1,11 @@
+{
+  "empty": ["blank", "blurred", "noise", "white", "black", "void", "blank screen", "empty canvas", "transparent", "clear", "static", "null image", "zero content"],
+  "abstract": ["pattern", "texture", "geometric", "shapes", "fractal", "lines", "abstract art", "background", "kaleidoscope", "conceptual", "visual noise", "optical illusion"],
+  "icon": ["logo", "symbol", "app icon", "emblem", "badge", "stamp", "mark", "glyph", "button", "simple graphic", "sign", "interface icon"],
+  "text": ["caption", "headline", "label", "sentence", "word", "typography", "quote", "banner", "bold text", "slogan", "written word", "large font", "text image"],
+  "document": ["form", "invoice", "letter", "contract", "ID card", "passport", "manual", "flyer", "report", "certificate", "paper", "scan"],
+  "diagram": ["chart", "graph", "flowchart", "network diagram", "infographic", "table", "timeline", "map", "blueprint", "layout", "grid", "structure"],
+  "meme": ["funny image", "captioned photo", "internet meme", "reaction image", "top text bottom text", "joke", "humor image", "sarcastic image", "viral image", "meme template", "meme format", "meme joke"],
+  "drawing": ["sketch", "painting", "comic", "illustration", "digital art", "rendering", "concept art", "cartoon", "stylized", "AI art", "hand-drawn", "line art"],
+  "photo": ["photograph", "snapshot", "camera image", "picture", "nature photo", "portrait", "street photo", "macro photo", "real world", "lifestyle photo", "wildlife photo", "landscape"]
+}
