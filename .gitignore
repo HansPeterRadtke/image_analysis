@@ -2,6 +2,8 @@
 .git-credentials
 image_analyzer/image_analyzer.egg-info/
 build/
+*.jpg
+*.png
 *.log
 *.tmp
 .idea/

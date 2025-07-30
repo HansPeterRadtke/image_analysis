@@ -12,6 +12,7 @@ print("[DEBUG] Starting create_data.py", flush = True)
 
 sys.path.append("../../image_generator")
 import make_ai_image
+import make_text
 
 folder_output = "data"
 folder_web    = "/var/www/html/images"
@@ -22,10 +23,10 @@ for category, synonymes in d_categories.items():
   category_dir = os.path.join(folder_output, category)
   os.makedirs(category_dir, exist_ok = True)
   for i in range(10):
-    filename  = f"{category}_{i:03d}.jpg"
+    filename  = f"{category}_{i:03d}.png"
     save_path = os.path.join(category_dir, filename)
     if(not os.path.exists(save_path)):
-      print(f"[DEBUG] Generating {filename} in category {category}", flush=True)
+      print(f"[DEBUG] Generating {filename} in category {category}", flush = True)
       try:
         if(category == "empty"):
           width, height = 256, 256
@@ -48,14 +49,22 @@ for category, synonymes in d_categories.items():
           if(random.random() < 0.5):
             image = image.filter(ImageFilter.GaussianBlur(radius=3))
           image.save(save_path)
+        elif(category == "text"):
+          text = random.choice(["Hello!\nTest!", "This is another\ntest", "aaaand ...\nagain\na\another\TEST!"])
+          print(f"[DEBUG] Calling make_text.make_text with text: {text}", flush = True)
+          ret = make_text.make_text(text = text, save_path = save_path)
+          if(ret is None):
+            print("[ERROR] There was a problem while generating image!", flush=True)
+            continue
+          print("[DEBUG] Image generation call finished", flush = True)
         else:
-          print("[DEBUG] Sleeping 5 seconds", flush = True)
-          time.sleep(5)
           prompt = category#random.choice(synonymes)
+          print(f"[DEBUG] Sleeping 5 seconds", flush = True)
+          time.sleep(5)
           print(f"[DEBUG] Calling make_ai_image.make_image with prompt: {prompt}", flush = True)
           ret = make_ai_image.make_image(prompt = prompt, output = save_path)
           if(ret is None):
-            print("[ERROR] There was a problem while generating image!")
+            print("[ERROR] There was a problem while generating image!", flush=True)
             continue
           print("[DEBUG] Image generation call finished", flush = True)
       except Exception:
@@ -68,5 +77,3 @@ for category, synonymes in d_categories.items():
     os.system(cmd)
 
 print("[DEBUG] Finished create_data.py", flush = True)
-
-
