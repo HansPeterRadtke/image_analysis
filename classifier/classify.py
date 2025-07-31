@@ -21,7 +21,7 @@ except Exception:
   print(traceback.format_exc(), flush=True)
 
 categories = ["empty", "diagram", "drawing", "photo"]
-base_path = Path("/home/hans/dev/GPT/github/image_analysis/classifier/data")
+base_path = Path("data")
 
 examples = {}
 for category in categories:
