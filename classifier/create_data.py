@@ -50,9 +50,11 @@ for category, synonymes in d_categories.items():
             image = image.filter(ImageFilter.GaussianBlur(radius=3))
           image.save(save_path)
         elif(category == "text"):
-          text = random.choice(["Hello!\nTest!", "This is another\ntest", "aaaand ...\nagain\na\another\TEST!"])
+          text  = random.choice(["Hello!\nTest!", "This is another\ntest", "aaaand ...\nagain\na\nanother\nTEST!"])
+          size  = random.randint(5, 30)
+          angle = random.randint(-45, 45)
           print(f"[DEBUG] Calling make_text.make_text with text: {text}", flush = True)
-          ret = make_text.make_text(text = text, save_path = save_path)
+          ret = make_text.make_text(text = text, fontsize = size, rotation = angle, save_path = save_path)
           if(ret is None):
             print("[ERROR] There was a problem while generating image!", flush=True)
             continue
